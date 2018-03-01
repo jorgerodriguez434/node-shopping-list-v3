@@ -39,7 +39,7 @@ app.post('/shopping-list', jsonParser, (req, res) => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
       console.error(message);
-      return res.status(400).send(message);
+      return res.status(400).send(message);   
     }
   }
 
@@ -70,6 +70,14 @@ app.post('/recipes', jsonParser, (req, res) => {
   }
   const item = Recipes.create(req.body.name, req.body.ingredients);
   res.status(201).json(item);
+});
+
+app.delete('/recipes/:id', (req, res) => {
+
+        Recipes.delete(req.params.id);
+        console.log(`Deleted recipe ${req.params.id}`);
+        res.status(204).end();      
+
 });
 
 
